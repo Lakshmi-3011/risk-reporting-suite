@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: risk-reporting-suite
+
   datasource:
     url: jdbc:postgresql://localhost:5432/risk_db
     username: postgres
@@ -8,3 +11,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+server:
+  port: 8080
+
+# Day 2 Completed
