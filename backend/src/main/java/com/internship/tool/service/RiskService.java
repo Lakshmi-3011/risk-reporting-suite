@@ -9,14 +9,31 @@ import java.util.List;
 @Service
 public class RiskService {
 
-    private List<Risk> risks = new ArrayList<>();
+    // Temporary in-memory storage
+    private List<Risk> riskList = new ArrayList<>();
 
+    // Get all risks
     public List<Risk> getAllRisks() {
-        return risks;
+        return riskList;
     }
 
+    // Add new risk
     public Risk addRisk(Risk risk) {
-        risks.add(risk);
+        riskList.add(risk);
         return risk;
+    }
+
+    // Get risk by ID
+    public Risk getRiskById(Long id) {
+        return riskList.stream()
+                .filter(r -> r.getId() != null && r.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Delete risk
+    public String deleteRisk(Long id) {
+        riskList.removeIf(r -> r.getId() != null && r.getId().equals(id));
+        return "Risk deleted successfully";
     }
 }
