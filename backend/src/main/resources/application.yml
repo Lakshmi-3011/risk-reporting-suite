@@ -1,18 +1,15 @@
 spring:
-  application:
-    name: risk-reporting-suite
-
   datasource:
-    url: jdbc:postgresql://localhost:5432/risk_db
+    url: jdbc:postgresql://localhost:5432/riskdb
     username: postgres
     password: postgres
-
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
-
-server:
-  port: 8080
-
-# Day 2 Completed
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
