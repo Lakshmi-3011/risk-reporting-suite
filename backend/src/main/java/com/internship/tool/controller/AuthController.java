@@ -35,7 +35,7 @@ public class AuthController {
                     .body(Map.of("error", "Username already exists"));
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("VIEWER");
+        if (user.getRole() == null || user.getRole().isEmpty()) { user.setRole("VIEWER"); }
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Map.of("message", "User registered successfully"));
