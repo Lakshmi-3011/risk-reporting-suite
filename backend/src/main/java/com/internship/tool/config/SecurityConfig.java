@@ -21,12 +21,10 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
-
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()   // ✅ allow login
-                .anyRequest().authenticated()              // ✅ allow with token
+                    .requestMatchers("/auth/**").permitAll()
+                    .anyRequest().permitAll()   // 🔥 IMPORTANT FIX
             )
-
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
