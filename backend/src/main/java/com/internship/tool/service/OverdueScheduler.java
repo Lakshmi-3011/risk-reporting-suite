@@ -14,12 +14,10 @@ public class OverdueScheduler {
     @Autowired
     private RiskService riskService;
 
-    @Autowired
-    private EmailService emailService;
-
     @Scheduled(fixedRate = 60000)
     public void checkOverdue() {
-        System.out.println("Checking overdue risks..."); // ✅ Step 3
+
+        System.out.println("Checking overdue risks...");
 
         List<Risk> risks = riskService.getAllRisks();
 
@@ -27,7 +25,7 @@ public class OverdueScheduler {
             if (risk.getDueDate() != null &&
                 risk.getDueDate().isBefore(LocalDate.now())) {
 
-                emailService.sendEmail(risk, "⚠ Overdue Risk");
+                System.out.println("Overdue Risk: " + risk.getTitle());
             }
         }
     }
